@@ -1,0 +1,39 @@
+
+# Hyperparameter Choices for Pneumonia Detection using Inception-V3
+
+1. Learning Rate:
+   - Initial phase: 0.0001 (1e-4)
+     Rationale: Small enough for stable convergence during feature extraction.
+   - Fine-tuning phase: 0.00001 (1e-5)
+     Rationale: Lowered learning rate to prevent disrupting pretrained weights.
+
+2. Batch Size:
+   - Value: 32
+   - Reason: Balanced trade-off between training speed and memory usage.
+     Works well with Inception-V3 on most GPUs or Colab TPUs.
+
+3. Epochs:
+   - Phase 1: 10 epochs (feature extractor)
+   - Phase 2: 5 epochs (fine-tuning top Inception-V3 layers)
+   - Rationale: EarlyStopping prevents overfitting, model usually converges early.
+
+4. Dropout:
+   - Values: 0.5 and 0.3
+   - Purpose: Regularization to reduce overfitting due to limited dataset size.
+
+5. Optimizer:
+   - Adam: Adaptive learning rate optimization, widely used in CNN tasks.
+
+6. Loss Function:
+   - Binary Crossentropy: Appropriate for binary classification (Normal vs Pneumonia).
+
+7. Metrics:
+   - Accuracy, AUC, Precision, Recall: Chosen to reflect medical relevance and handle class imbalance.
+
+8. Class Weights:
+   - Computed from training set to mitigate class imbalance.
+
+9. Data Augmentation:
+   - Techniques: Rotation, Zoom, Shift, Horizontal Flip
+   - Purpose: Improves generalization by simulating real-world variation.
+(we did not use data agumentation but for more accurate model it good to do.)
